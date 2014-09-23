@@ -164,7 +164,7 @@ public enum SwingObservable { ; // no instances
     }
 
     /**
-     * Check if the current thead is the event dispatch thread.
+     * Check if the current thread is the event dispatch thread.
      * @throws IllegalStateException if the current thread is not the event dispatch thread.
      */
     public static void assertEventDispatchThread() {
