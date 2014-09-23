@@ -1,12 +1,12 @@
 /**
  * Copyright 2014 Netflix, Inc.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,23 +26,23 @@ import java.util.Set;
 
 import javax.swing.AbstractButton;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
 
 import rx.Observable;
 import rx.functions.Func1;
-import rx.swing.sources.AbstractButtonSource;
-import rx.swing.sources.ComponentEventSource;
-import rx.swing.sources.KeyEventSource;
-import rx.swing.sources.MouseEventSource;
+import rx.swing.sources.*;
 
 /**
- * Allows creating observables from various sources specific to Swing. 
+ * Allows creating observables from various sources specific to Swing.
  */
 public enum SwingObservable { ; // no instances
 
     /**
      * Creates an observable corresponding to a Swing button action.
-     * 
-     * @param button 
+     *
+     * @param button
      *            The button to register the observable for.
      * @return Observable of action events.
      */
@@ -52,7 +52,7 @@ public enum SwingObservable { ; // no instances
 
     /**
      * Creates an observable corresponding to raw key events.
-     * 
+     *
      * @param component
      *            The component to register the observable for.
      * @return Observable of key events.
@@ -63,7 +63,7 @@ public enum SwingObservable { ; // no instances
 
     /**
      * Creates an observable corresponding to raw key events, restricted a set of given key codes.
-     * 
+     *
      * @param component
      *            The component to register the observable for.
      * @return Observable of key events.
@@ -79,7 +79,7 @@ public enum SwingObservable { ; // no instances
 
     /**
      * Creates an observable that emits the set of all currently pressed keys each time
-     * this set changes. 
+     * this set changes.
      * @param component
      *            The component to register the observable for.
      * @return Observable of currently pressed keys.
@@ -90,7 +90,7 @@ public enum SwingObservable { ; // no instances
 
     /**
      * Creates an observable corresponding to raw mouse events (excluding mouse motion events).
-     * 
+     *
      * @param component
      *            The component to register the observable for.
      * @return Observable of mouse events.
@@ -101,7 +101,7 @@ public enum SwingObservable { ; // no instances
 
     /**
      * Creates an observable corresponding to raw mouse motion events.
-     * 
+     *
      * @param component
      *            The component to register the observable for.
      * @return Observable of mouse motion events.
@@ -109,7 +109,7 @@ public enum SwingObservable { ; // no instances
     public static Observable<MouseEvent> fromMouseMotionEvents(Component component) {
         return MouseEventSource.fromMouseMotionEventsOf(component);
     }
-    
+
     /**
      * Creates an observable corresponding to relative mouse motion.
      * @param component
@@ -119,10 +119,10 @@ public enum SwingObservable { ; // no instances
     public static Observable<Point> fromRelativeMouseMotion(Component component) {
         return MouseEventSource.fromRelativeMouseMotion(component);
     }
-    
+
     /**
      * Creates an observable corresponding to raw component events.
-     * 
+     *
      * @param component
      *            The component to register the observable for.
      * @return Observable of component events.
@@ -133,7 +133,7 @@ public enum SwingObservable { ; // no instances
 
     /**
      * Creates an observable corresponding to component resize events.
-     * 
+     *
      * @param component
      *            The component to register the observable for.
      * @return Observable emitting the current size of the given component after each resize event.
@@ -143,8 +143,28 @@ public enum SwingObservable { ; // no instances
     }
 
     /**
+     * Creates an observable corresponding to document events.
+     *
+     * @param document
+     *            The document to register the observable for.
+     * @return Observable of document events.
+     */
+    public static Observable<DocumentEvent> fromDocumentEvents(Document document) {
+        return DocumentEventSource.fromDocumentEvents(document);
+    }
+
+    /**
+     * Creates an observable corresponding to component document events.
+     * @param component
+     *            The document holder component.
+     * @return Observable of component document events.
+     */
+    public static Observable<DocumentEvent> fromDocumentEvents(JTextComponent component) {
+        return fromDocumentEvents(component.getDocument());
+    }
+
+    /**
      * Check if the current thead is the event dispatch thread.
-     * 
      * @throws IllegalStateException if the current thread is not the event dispatch thread.
      */
     public static void assertEventDispatchThread() {
