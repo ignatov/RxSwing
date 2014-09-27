@@ -138,6 +138,17 @@ public enum SwingObservable { ; // no instances
     }
 
     /**
+     * Creates an observable corresponding to focus component events.
+     *
+     * @param component
+     *            The component to register the observable for.
+     * @return Observable of component events.
+     */
+    public static Observable<FocusEvent> fromFocusEvents(Container component) {
+        return FocusEventSource.fromFocusEventsOf(component);
+    }
+
+    /**
      * Creates an observable corresponding to component resize events.
      *
      * @param component
