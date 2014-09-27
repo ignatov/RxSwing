@@ -15,13 +15,8 @@
  */
 package rx.observables;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Set;
 
 import javax.swing.AbstractButton;
@@ -129,6 +124,17 @@ public enum SwingObservable { ; // no instances
      */
     public static Observable<ComponentEvent> fromComponentEvents(Component component) {
         return ComponentEventSource.fromComponentEventsOf(component);
+    }
+
+    /**
+     * Creates an observable corresponding to raw component events.
+     *
+     * @param component
+     *            The component to register the observable for.
+     * @return Observable of component events.
+     */
+    public static Observable<ContainerEvent> fromContainerEvents(Container component) {
+        return ContainerEventSource.fromContainerEventsOf(component);
     }
 
     /**
