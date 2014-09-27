@@ -13,6 +13,10 @@ import javax.swing.text.Document;
 public enum DocumentEventSource {
     ;
 
+    /**
+     * @see rx.observables.SwingObservable#fromDocumentEvents(javax.swing.text.Document)
+     * @see rx.observables.SwingObservable#fromDocumentEvents(javax.swing.text.JTextComponent)
+     */
     public static Observable<DocumentEvent> fromDocumentEvents(final Document document) {
         return Observable.create(new Observable.OnSubscribe<DocumentEvent>() {
             @Override
