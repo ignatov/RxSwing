@@ -35,6 +35,7 @@ public enum KeyEventSource { ; // no instances
 
     /**
      * @see rx.observables.SwingObservable#fromKeyEvents(Component)
+     * @see rx.observables.SwingObservable#fromKeyEvents(java.awt.Component, java.util.Set)
      */
     public static Observable<KeyEvent> fromKeyEventsOf(final Component component) {
         return Observable.create(new OnSubscribe<KeyEvent>() {
