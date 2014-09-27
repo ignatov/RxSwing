@@ -149,6 +149,17 @@ public enum SwingObservable { ; // no instances
     }
     
     /**
+     * Creates an observable corresponding to focus window events.
+     *
+     * @param window
+     *            The window to register the observable for.
+     * @return Observable of window focus events.
+     */
+    public static Observable<WindowEvent> fromWindowFocusEvents(Window window) {
+        return WindowFocusEventSource.fromWindowFocusEventsOf(window);
+    }
+    
+    /**
      * Creates an observable corresponding to window events.
      *
      * @param window
